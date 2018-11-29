@@ -1,7 +1,9 @@
+'use strict';
+
 class TodoApp extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { items: [], text: '' };
+        this.state = {items: [], text: ''};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -15,13 +17,16 @@ class TodoApp extends React.Component {
                 null,
                 "TODO"
             ),
-            React.createElement(TodoList, { items: this.state.items }),
+            React.createElement(TodoList, {
+                items: this.state.items,
+                deleteItem: this.handleDelete.bind(this)
+            }),
             React.createElement(
                 "form",
-                { onSubmit: this.handleSubmit },
+                {onSubmit: this.handleSubmit},
                 React.createElement(
                     "label",
-                    { htmlFor: "new-todo" },
+                    {htmlFor: "new-todo"},
                     "What needs to be done?"
                 ),
                 React.createElement("input", {
@@ -40,7 +45,7 @@ class TodoApp extends React.Component {
     }
 
     handleChange(e) {
-        this.setState({ text: e.target.value });
+        this.setState({text: e.target.value});
     }
 
     handleSubmit(e) {
@@ -53,23 +58,19 @@ class TodoApp extends React.Component {
             id: Date.now()
         };
         this.setState(state => ({
-            items: state.items.concat(newItem),
+            items: state.items.concat(newItem), // a=a+"naujas"
             text: ''
         }));
     }
-}
 
-class TodoList extends React.Component {
-    render() {
-        return React.createElement(
-            "ul",
-            null,
-            this.props.items.map(item => React.createElement(
-                "li",
-                { key: item.id },
-                item.text
-            ))
-        );
+    handleDelete(item) {
+        var items = this.state.items;
+        var index = items.indexOf(item);
+        items.splice(index, 1);
+        this.state.items = items;
+        this.setState(state => ({
+            items: state.items
+        }));
     }
 }
 
