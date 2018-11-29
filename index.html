@@ -10,6 +10,25 @@
     <!-- Load our React component. -->
     <script src="src/todo-app.js"></script>
     <script src="src/todo-list.js"></script>
+
+    <style>
+        li {
+            list-style: none;
+            font-family: "Verdana";
+            font-size: 20px;
+            width: 300px;
+            margin-bottom: 10px;
+            text-transform: capitalize;
+        }
+
+        li b {
+            margin-left: 10px;
+        }
+
+        li button {
+            float: right;
+        }
+    </style>
 </head>
 
 
@@ -19,14 +38,13 @@
 <script>
 
 
-
     $.ajax({
         type: 'GET',
         url: 'http://192.168.3.107:8080/items',
         crossDomain: true,
         dataType: 'json',
         success: function (data) {
-            window.data=data;
+            window.data = data;
 
             const domContainer = document.querySelector('#like_button_container');
             ReactDOM.render(React.createElement(TodoApp, null), domContainer);

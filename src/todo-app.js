@@ -4,7 +4,6 @@ class TodoApp extends React.Component {
     constructor(props) {
         super(props);
         var temp = window.data.slice();
-
         this.state = {items: temp, text: ''};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
