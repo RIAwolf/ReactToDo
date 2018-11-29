@@ -17,8 +17,7 @@
 <div id="like_button_container"></div>
 
 <script>
-    const domContainer = document.querySelector('#like_button_container');
-    ReactDOM.render(React.createElement(TodoApp, null), domContainer);
+
 
 
     $.ajax({
@@ -27,12 +26,13 @@
         crossDomain: true,
         dataType: 'json',
         success: function (data) {
-            debugger;
-            alert("Success");
+            window.data=data;
+
+            const domContainer = document.querySelector('#like_button_container');
+            ReactDOM.render(React.createElement(TodoApp, null), domContainer);
         },
         error: function (data) {
-            debugger;
-            alert('Failed!');
+            console.log(data);
         },
     })
 </script>
