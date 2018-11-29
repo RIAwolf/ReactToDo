@@ -54,14 +54,36 @@ class TodoApp extends React.Component {
         if (!this.state.text.length) {
             return;
         }
+        debugger;
+        $.ajax({
+            type: 'POST',
+            url: 'http://192.168.3.107:8080/item',
+            crossDomain: true,
+            dataType: 'json',
+            data: {
+                title: this.state.text,
+                done: 0,
+                user: "Overlord"
+            },
+
+            error: function (data) {
+                console.log(data);
+            },
+        }).done((data) => {
+            debugger;
+            this.setState(state => ({
+                items: data,
+                text: ''
+            }));
+        });
+
         const newItem = {
-            text: this.state.text,
-            id: Date.now()
+            title: this.state.text,
+            done: 0,
+            user: "Overlord"
         };
-        this.setState(state => ({
-            items: state.items.concat(newItem), // a=a+"naujas"
-            text: ''
-        }));
+
+
     }
 
     handleDelete(item) {
