@@ -10,7 +10,6 @@ class TodoList extends React.Component {
                 {key: item.id},
                 item.text,
                 React.createElement('button', {
-
                     onClick: () => {
                         this.props.deleteItem(item)
                     }

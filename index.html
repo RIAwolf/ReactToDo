@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>React To-Do</title>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" crossorigin></script>
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 
@@ -16,10 +16,25 @@
 <body>
 <div id="like_button_container"></div>
 
-
 <script>
     const domContainer = document.querySelector('#like_button_container');
     ReactDOM.render(React.createElement(TodoApp, null), domContainer);
+
+
+    $.ajax({
+        type: 'GET',
+        url: 'http://192.168.3.107:8080/items',
+        crossDomain: true,
+        dataType: 'json',
+        success: function (data) {
+            debugger;
+            alert("Success");
+        },
+        error: function (data) {
+            debugger;
+            alert('Failed!');
+        },
+    })
 </script>
 </body>
 </html>
